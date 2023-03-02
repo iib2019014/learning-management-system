@@ -1,0 +1,17 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <form action="" method="post"> {% csrf_token %}
+        <label for="username">username</label>
+        <input type="text" name="username" id="username">
+
+        <label for="password">password</label>
+        <input type="password" name="password" id="password">
+
+        <button type="submit">login</button>
+    </form>
+
+{% endblock %}
