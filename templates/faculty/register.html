@@ -3,10 +3,11 @@
 
 {% block content %}
 
-    <form action="" method="post"> {% csrf_token %}
-        {{facultyRegisterForm.as_p}}
-
-        <button type="submit">register</button>
-    </form>
+    <div class="login-div">
+        <form class="login-form" action="" method="post"> {% csrf_token %}
+            {{facultyRegisterForm.as_p}}
+            <button type="submit" class="btn">register</button>
+        </form>
+    </div>
 
 {% endblock %}

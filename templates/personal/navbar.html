@@ -1,0 +1,33 @@
+<div class="navbar">
+    <div class="nav-item">
+        <a href="#">courses</a>
+    </div>
+    <div class="nav-item">
+        {% if request.user|isStudent %}
+            <a href="#">materials</a>
+        {% else %}
+            <a href="#">materials</a>
+        {% endif %}
+    </div>
+    <div class="nav-item">
+        {% if request.user|isStudent %}
+            <a href="#">assignments</a>
+        {% else %}
+            <a href="#">assignments</a>
+        {% endif %}
+    </div>
+    <div class="nav-item">
+        {% if request.user|isStudent %}
+            <a href="#">attendance</a>
+        {% else %}
+            <a href="#">attendance</a>
+        {% endif %}
+    </div>
+    <div class="nav-item">
+        {% if request.user|isStudent %}
+            <a href="#">feedbacks</a>
+        {% else %}
+            <a href="#">feedbacks</a>
+        {% endif %}
+    </div>
+</div>

@@ -18,20 +18,32 @@
                 <h3>Learning Management System</h3>
             </div>
             <div class="authenticate-div">
-                <div class="faculty-auth">
-                    <a href="{% url 'faculty-register' %}">faculty sign up</a>
-                    <a href="{% url 'faculty-login' %}">faculty sign in</a>
-                </div>
-                <div class="student-auth">
-                    <a href="{% url 'student-register' %}">student sign up</a>
-                    <a href="{% url 'student-login' %}">student sign in</a>
-                </div>
+                {% if request.user.is_authenticated %}
+                    <a href="#">profile</a>
+                    <a href="#">logout</a>
+                {% else %}
+                    <div class="faculty-auth">
+                        <a href="{% url 'faculty-register' %}">faculty sign up</a>
+                        <a href="{% url 'faculty-login' %}">faculty sign in</a>
+                    </div>
+                    <div class="student-auth">
+                        <a href="{% url 'student-register' %}">student sign up</a>
+                        <a href="{% url 'student-login' %}">student sign in</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
 
-        <div class="navbar">
 
-        </div>
+        <!-- navbar start  -->
+
+            {% if request.user.is_authenticated %}
+
+                {% include 'personal/navbar.html' %}
+
+            {% endif %}
+
+        <!-- navbar end -->
     </div>
 
 
