@@ -9,7 +9,11 @@ from .models import (
 
 class StudentForm(UserCreationForm) :
 
-    rollno = forms.CharField(max_length=255, required=True)
+    rollno = forms.CharField(max_length=255, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='password', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='password', widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta :
         model = User

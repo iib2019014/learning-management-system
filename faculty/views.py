@@ -61,6 +61,9 @@ def renderFacultyRegistrationView(request) :
 
     else :
         context['facultyRegisterForm'] = FacultyForm()
+        for field in context['facultyRegisterForm'] :
+            print(field.label_tag)
+            print(field)
 
     return render(request, APPNAME +  '/register.html', context)
 

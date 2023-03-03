@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fauna+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap');
+
+
+:root {
+    /* colors */
+
+    --clr-primary-100: #e2e0ff;
+    /* --clr-primary-100: #fee0ff; */
+    --clr-primary-200: #c1beff;
+    /* --clr-primary-200: #ffbefc; */
+    --clr-primary-300: #a29dff;
+    /* --clr-primary-300: #ff9df2; */
+    --clr-primary-400: #837dff;
+    /* --clr-primary-400: #ff7df4; */
+    --clr-primary-500: #645cff;
+    /* --clr-primary-500: #ff5cf1; */
+    --clr-primary-600: #504acc;
+    /* --clr-primary-600: #cc4ac6; */
+    --clr-primary-700: #3c3799;
+    /* --clr-primary-700: #99378c; */
+    --clr-primary-800: #282566;
+    /* --clr-primary-800: #662553; */
+    --clr-primary-900: #141233;
+    /* --clr-primary-900: #33122f; */
+
+
+    /* grey */
+    --clr-grey-50: #f8fafc;
+    --clr-grey-100: #f1f5f9;
+    --clr-grey-200: #e2e8f0;
+    --clr-grey-300: #cbd5e1;
+    --clr-grey-400: #94a3b8;
+    --clr-grey-500: #64748b;
+    --clr-grey-600: #475569;
+    --clr-grey-700: #334155;
+    --clr-grey-800: #1e293b;
+    --clr-grey-900: #0f172a;
+
+
+    /* color-palatte */
+    --palatte-1: #03001C;
+    --palatte-2: #301E67;
+    --palatte-3: #5B8FB9;
+    --palatte-4: #B6EADA;
+
+
+
+    /* fonts */
+    
+    --font-primary: 'Bree Serif', serif;
+    --font-high: 'Lobster Two', cursive;
+    --font-alert: 'Kelly Slab', cursive;
+}

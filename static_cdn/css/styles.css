@@ -1,3 +1,164 @@
-.site-head {
-    display: none;
+@import url(./globals.css);
+@import url(./variables.css);
+
+.header {
+    width: 100%;
+
+    padding: 1.2rem;
+
+    background-color: var(--palatte-1);
 }
+
+.site-head {
+    display: flex;
+    justify-content: space-between;
+
+    font-family: var(--font-primary);
+}
+
+.site-title h3 {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+
+.authenticate-div {
+    display: flex;
+}
+
+
+.faculty-auth, .student-auth {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1rem 1rem;
+
+    /* text-transform: uppercase; */
+    /* font-weight: 600; */
+}
+
+.faculty-auth a, .student-auth a {
+    color: var(--palatte-3);
+
+    padding: 2px;
+    border-radius: 5px;
+
+    transition: background-color 0.5s;
+}
+
+
+.faculty-auth a:hover, .student-auth a:hover {
+    background-color: var(--palatte-2);
+}
+
+
+
+
+
+/* navbar start */
+
+.navbar {
+    background-color: var(--palatte-2);
+
+    display: flex;
+    justify-content: space-around;
+    
+    font-family: var(--font-primary);
+}
+
+.navbar a {
+    color: var(--palatte-1);
+
+    font-size: 1.5rem;
+    
+    padding: 2px;
+    border-radius: 5px;
+    
+    transition: all 0.5s;
+}
+
+.navbar a:hover {
+    color: var(--palatte-2);
+    background-color: var(--palatte-1);
+}
+
+/* navbar end */
+
+
+
+/* login start */
+
+.login-div {
+    width: 50%;
+
+    margin: auto;
+    padding: 2rem;
+
+    border-radius: 10px;
+
+    color: var(--clr-primary-100);
+    background-color: var(--clr-primary-300);
+
+    font-family: var(--font-primary);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    
+    padding: .5rem;
+    
+    border-radius: 10px;
+
+    
+    /* background-color: var(--clr-primary-700); */
+
+    /* box-shadow: 5px 5px 5px 1px var(--clr-primary-500); */
+}
+
+.login-form label {
+    margin: .5rem 0 0 0;
+
+    font-size: 1.5rem;
+}
+
+.form-group {
+    width: 75%;
+    margin: auto;
+}
+
+.login-form button {
+    margin: 5rem;
+
+    width: 75%;
+    margin: .5rem auto;
+
+    font-size: 1.5rem;
+
+    color: var(--clr-primary-100);
+    background-color: var(--clr-primary-700);
+}
+
+.login-form button:hover {
+    background-color: var(--clr-primary-800);
+
+}
+
+/* login end */
+
+
+
+
+
+
+
+
+/* content start */
+
+.content {
+    min-height: 100vh;
+    padding: 1rem;
+
+    background-color: var(--clr-primary-100);
+}
+
+/* content end */

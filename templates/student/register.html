@@ -3,10 +3,16 @@
 
 {% block content %}
 
-    <form action="" method="post"> {% csrf_token %}
-        {{studentRegisterForm.as_p}}
-
-        <button type="submit">register</button>
-    </form>
+    <div class="login-div">
+        <form class="login-form" action="" method="post"> {% csrf_token %}
+            {% for field in studentRegisterForm %}
+                <div class="form-group">
+                    {{field.label_tag}}
+                    {{field}}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn">register</button>
+        </form>
+    </div>
 
 {% endblock %}
