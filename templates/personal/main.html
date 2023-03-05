@@ -20,7 +20,7 @@
             <div class="authenticate-div">
                 {% if request.user.is_authenticated %}
                     <a href="#">profile</a>
-                    <a href="#">logout</a>
+                    <a href="{% url 'logout' %}">logout</a>
                 {% else %}
                     <div class="faculty-auth">
                         <a href="{% url 'faculty-register' %}">faculty sign up</a>
