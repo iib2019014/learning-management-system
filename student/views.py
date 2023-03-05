@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.template.defaulttags import register
+from django.contrib import messages
 
 
 from .models import (
@@ -26,46 +27,43 @@ def renderStudentRegistrationView(request) :
     context = {}
 
     if request.method == 'POST' :
-        print("post")
         studentRegisterForm = StudentForm(request.POST)
 
         if studentRegisterForm.is_valid() :
 
-            print("valid")
-            
             rollno = request.POST['rollno']
 
-            record = StudentRecord.objects.filter(rollno__iexact=rollno).first()
+            
+            try :
+                record = StudentRecord.objects.get(rollno=rollno)
+            except StudentRecord.DoesNotExist :
+                messages.error(request, 'StudentRecord with this email does not exist!')
+                return redirect('student-register')
+            
+            print(f'record is {record}')
+            
+            if record.get_student() :
+                messages.error(request, 'An account with this email already exists!')
+                return redirect('student-register')
 
+            user = User.objects.create_user(
+                email=record.email,
+                username=request.POST['username'],
+                password=request.POST['password1'],
+            )
 
-            if record :
+            user.groups.add(Group.objects.get(name='student'))
 
-                print("record found")
+            student = Student.objects.create(
+                user=user,
+                record=record,
+            )
 
-                if not record.get_student() :
+            messages.success(request, 'Account created successfully!')
 
-                    print("not registered")
+            return redirect('home')
 
-                    # create a user
-                    user = User.objects.create_user(
-                        email=record.email,
-                        username=request.POST['username'],
-                        password=request.POST['password1']
-                    )
-
-                    # add the user to 'student' group
-                    user.groups.add(Group.objects.get(name='student'))
-                    print("group added")
-
-                    # create student with this user,
-                    student = Student.objects.create(
-                        user=user,
-                        record = record,
-                    )
-
-                    print(student, " created")
-
-                    return redirect('home')
+        messages.error(request, studentRegisterForm.errors)
 
 
     studentRegisterForm = StudentForm()
@@ -98,6 +96,8 @@ def renderStudentLoginView(request) :
                 print("logged in")
 
                 return redirect('home')
+
+        messages.error(request, 'Invalid Credentials!')
 
     return render(request, APPNAME + '/login.html', context)
 

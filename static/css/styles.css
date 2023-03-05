@@ -148,6 +148,29 @@
 
 
 
+/* error messages start */
+
+.errors {
+    width: 30%;
+
+    margin: 1rem auto;
+    padding: .5rem;
+
+    border-radius: 5px;
+
+    font-size: 1.2rem;
+
+    color: var(--clr-primary-500);
+    background-color: var(--clr-primary-900);
+
+    font-family: var(--font-alert);
+}
+
+/* error messages end */
+
+
+
+
 
 
 
