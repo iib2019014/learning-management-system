@@ -25,6 +25,20 @@ APPNAME = 'student'
 # Create your views here.
 
 
+def renderStudentHomeView(request) :
+    context = {}
+
+    if request.user.is_authenticated :
+        student = request.user.student
+        courses = student.courses.all()
+
+        context['courses'] = courses
+
+        return render(request, APPNAME + '/home.html', context)
+    
+    return redirect('home')
+
+
 def renderStudentRegistrationView(request) :
 
     context = {}
@@ -98,7 +112,7 @@ def renderStudentLoginView(request) :
                 login(request, user)
                 # print("logged in")
 
-                return redirect('student-courses')
+                return redirect('student-home')
 
         messages.error(request, 'Invalid Credentials!')
 
@@ -145,6 +159,9 @@ def renderAvailableCoursesView(request) :
         for course in checked_courses :
             student = request.user.student
             student.courses.add(course)
+
+        student.enrolled = True
+
         student.save()
 
         messages.success(request, 'Successfully added courses!')

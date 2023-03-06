@@ -21,7 +21,7 @@
                 {% if request.user.is_authenticated %}
                     <a href="#" class="link-success">profile</a>
                     <a href="{% url 'logout' %}" class="link-danger">logout</a>
-                    {% if request.user|isStudent %}
+                    {% if request.user|isStudent and not request.user.student.enrolled %}
                         <a href="{% url 'available-courses' %}" class="link-info">course enrollment</a>
                     {% endif %}
                 {% else %}

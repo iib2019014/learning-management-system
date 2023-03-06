@@ -19,6 +19,8 @@ class Student(models.Model) :
 
     courses = models.ManyToManyField(Course, blank=True)
 
+    enrolled = models.BooleanField(default=False)
+
 
     def __str__(self) :
         return self.record.name

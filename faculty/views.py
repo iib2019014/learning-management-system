@@ -22,6 +22,19 @@ APPNAME = 'faculty'
 
 # Create your views here.
 
+def renderFacultyHomeView(request) :
+    context = {}
+    
+    if request.user.is_authenticated :
+        faculty = request.user.faculty
+        courses = faculty.courses.all()
+
+        context['courses'] = courses
+
+        return render(request, APPNAME + '/home.html', context)
+    
+    return redirect('home')
+
 def renderFacultyRegistrationView(request) :
 
     context = {}
@@ -95,7 +108,7 @@ def renderFacultyLoginView(request) :
                 login(request, user)
                 print("logged in")
 
-                return redirect('home')
+                return redirect('faculty-home')
             
         messages.error(request, 'Invalid Credentials!')
 

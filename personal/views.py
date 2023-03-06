@@ -6,6 +6,10 @@ from .models import (
     Course,
 )
 
+from student.views import (
+    isStudent,
+)
+
 
 
 APPNAME = 'personal'
@@ -15,6 +19,11 @@ APPNAME = 'personal'
 
 def renderHomeView(request) :
     context = {}
+
+    if request.user.is_authenticated :
+        if isStudent(request.user) :
+            return redirect('student-home')
+        return redirect('faculty-home')
 
     print("in home view")
     return render(request, APPNAME + '/home.html', context)
