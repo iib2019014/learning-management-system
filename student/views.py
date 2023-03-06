@@ -10,7 +10,10 @@ from .models import (
 )
 
 from personal.models import (
+    Course,
     StudentRecord,
+
+    MIN_CREDITS,
 )
 
 from .forms import (
@@ -81,19 +84,19 @@ def renderStudentLoginView(request) :
         username = request.POST['username']
         password = request.POST['password']
 
-        print(username, password)
+        # print(username, password)
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None :
 
-            print("user present")
+            # print("user present")
 
             # check if the user is a student
 
             if isStudent(user) :
                 login(request, user)
-                print("logged in")
+                # print("logged in")
 
                 return redirect('student-courses')
 
@@ -106,10 +109,55 @@ def renderStudentLoginView(request) :
 def renderCoursesView(request) :
     context = {}
 
+    # student = request.user.student
+
+    # courses = student.courses.all()
+
+    # context['courses'] = courses
+
     return render(request, APPNAME + '/courses.html', context)
 
 
 
+def renderAvailableCoursesView(request) :
+    context = {}
+
+
+    if request.method == 'POST' :
+        checked_ids = request.POST.getlist('available_courses')
+        print(checked_ids)
+
+
+        checked_courses = []
+        credits = 0
+
+        for id in checked_ids :
+            course = Course.objects.get(id=id)
+            checked_courses.append(course)
+
+            credits += course.credits
+
+        if credits < MIN_CREDITS :
+            messages.warning(request, f'You need to select courses for at least {MIN_CREDITS} credits!')
+
+            return redirect('available-courses')
+        
+        for course in checked_courses :
+            student = request.user.student
+            student.courses.add(course)
+        student.save()
+
+        messages.success(request, 'Successfully added courses!')
+
+        return redirect('home')
+
+
+
+    courses = Course.objects.all()
+
+    context['courses'] = courses
+
+    return render(request, APPNAME + '/enrollment.html', context)
 
 
 
@@ -123,10 +171,10 @@ def renderCoursesView(request) :
 
 @register.filter
 def isStudent(user) :
-    print(user)
+    # print(user)
     if user.groups.exists() :
-        print(user.groups.all())
+        # print(user.groups.all())
         if user.groups.all()[0].name == 'student' :
-            print(f'{user} is student')
+            # print(f'{user} is student')
             return True
     return False

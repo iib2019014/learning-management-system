@@ -28,14 +28,3 @@ def renderLogoutView(request) :
 
     return redirect('home')
     # return render(request, APPNAME + '/home.html', context)
-
-
-
-def renderAvailableCoursesView(request) :
-    context = {}
-
-    courses = Course.objects.all()
-
-    context['courses'] = courses
-
-    return render(request, APPNAME + '/enrollment.html', context)

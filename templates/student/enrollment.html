@@ -5,10 +5,14 @@
 {% block content %}
 
 
-    <form class="enroll-courses" action="" method="post">
+    {% include 'personal/errors.html' %}
+
+
+
+    <form class="enroll-courses" action="" method="post"> {% csrf_token %}
         {% for course in courses %}
             <label>
-                <input type="checkbox" value="1">
+                <input type="checkbox" value={{course.id}} name="available_courses">
                 <div class="enroll-course">
                     <div class="enroll-course-title">{{course.title}}</div>
                     <div class="enroll-course-code">{{course.code}}</div>

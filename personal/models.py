@@ -3,6 +3,8 @@ from django.db import models
 
 # Create your models here.
 
+MIN_CREDITS = 12
+
 
 SEMESTER = (
     (1, 1),
@@ -80,7 +82,7 @@ class Course(models.Model) :
 
     department = models.CharField(max_length=255, blank=False, choices=DEPARTMENT)
 
-    credits = models.IntegerField(default=2)
+    credits = models.IntegerField(default=4)
 
     def __str__(self) :
         return self.title

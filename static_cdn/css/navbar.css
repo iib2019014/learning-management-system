@@ -1,0 +1,32 @@
+@import url(./globals.css);
+@import url(./variables.css);
+
+/* navbar start */
+
+.navbar {
+    background-color: var(--palatte-2);
+
+    display: flex;
+    justify-content: space-around;
+    
+    font-family: var(--font-primary);
+}
+
+.navbar a {
+    color: var(--palatte-1);
+
+    font-size: 1.5rem;
+    
+    padding: 2px;
+    border-radius: 5px;
+    
+    transition: all 0.5s;
+}
+
+.navbar a:hover {
+    color: var(--palatte-2);
+    background-color: var(--palatte-1);
+}
+
+/* navbar end */
+

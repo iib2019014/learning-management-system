@@ -1,0 +1,56 @@
+@import url(./globals.css);
+@import url(./variables.css);
+
+.enroll-courses {
+}
+
+.enroll-course {
+    display: flex;
+    align-content: space-between;
+}
+
+.enroll-course div {
+    margin: 1rem 0;
+}
+
+.enroll-courses label {
+    float: left;
+
+    margin: 1rem;
+
+    text-align: center;
+
+    /* border: 1px solid red; */
+}
+
+.enroll-courses label .enroll-course {
+    display: block;
+
+    width: 15rem;
+    height: 15rem;
+    
+    text-align: center;
+
+    font-family: var(--font-primary);
+    
+    padding: 3px 0px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+    
+    /* border: 1px solid red; */
+
+    color: var(--clr-primary-800);
+    background-color: var(--clr-primary-400);
+}
+
+.enroll-courses label input {
+    position: absolute;
+    top: -20px;
+}
+
+.enroll-courses input:checked + .enroll-course {
+    color: var(--clr-primary-400);
+    background-color: var(--clr-primary-800);
+}
