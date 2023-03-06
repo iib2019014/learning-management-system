@@ -95,11 +95,29 @@ def renderStudentLoginView(request) :
                 login(request, user)
                 print("logged in")
 
-                return redirect('home')
+                return redirect('student-courses')
 
         messages.error(request, 'Invalid Credentials!')
 
     return render(request, APPNAME + '/login.html', context)
+
+
+
+def renderCoursesView(request) :
+    context = {}
+
+    return render(request, APPNAME + '/courses.html', context)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

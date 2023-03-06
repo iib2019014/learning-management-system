@@ -37,6 +37,8 @@ class StudentRecord(models.Model) :
     rollno = models.CharField(max_length=255, blank=False)
 
     semester = models.IntegerField(choices=SEMESTER)
+    
+    department = models.CharField(max_length=255, blank=False, choices=DEPARTMENT, default='IT-BI')
 
     def __str__(self) :
         return self.name
@@ -77,6 +79,8 @@ class Course(models.Model) :
     title = models.CharField(max_length=255, blank=False)
 
     department = models.CharField(max_length=255, blank=False, choices=DEPARTMENT)
+
+    credits = models.IntegerField(default=2)
 
     def __str__(self) :
         return self.title

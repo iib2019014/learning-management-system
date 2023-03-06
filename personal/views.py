@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
 
+from .models import (
+    Course,
+)
+
+
 
 APPNAME = 'personal'
 
@@ -23,3 +28,14 @@ def renderLogoutView(request) :
 
     return redirect('home')
     # return render(request, APPNAME + '/home.html', context)
+
+
+
+def renderAvailableCoursesView(request) :
+    context = {}
+
+    courses = Course.objects.all()
+
+    context['courses'] = courses
+
+    return render(request, APPNAME + '/enrollment.html', context)

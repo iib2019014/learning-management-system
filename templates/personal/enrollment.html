@@ -1,0 +1,25 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+    <form class="enroll-courses" action="" method="post">
+        {% for course in courses %}
+            <label>
+                <input type="checkbox" value="1">
+                <div class="enroll-course">
+                    <div class="enroll-course-title">{{course.title}}</div>
+                    <div class="enroll-course-code">{{course.code}}</div>
+                    <div class="enroll-course-faculty">{{course.faculty}}</div>
+                    <div class="enroll-course-department">{{course.department}}</div>
+                    <div class="enroll-course-credits">{{course.credits}}</div>
+                </div>
+            </label>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">submit</button>
+    </form>
+
+{% endblock %}

@@ -19,8 +19,9 @@
             </div>
             <div class="authenticate-div">
                 {% if request.user.is_authenticated %}
-                    <a href="#">profile</a>
-                    <a href="{% url 'logout' %}">logout</a>
+                    <a href="#" class="link-success">profile</a>
+                    <a href="{% url 'logout' %}" class="link-danger">logout</a>
+                    <a href="{% url 'available-courses' %}" class="link-info">course enrollment</a>
                 {% else %}
                     <div class="faculty-auth">
                         <a href="{% url 'faculty-register' %}">faculty sign up</a>
@@ -33,17 +34,6 @@
                 {% endif %}
             </div>
         </div>
-
-
-        <!-- navbar start  -->
-
-            {% if request.user.is_authenticated %}
-
-                {% include 'personal/navbar.html' %}
-
-            {% endif %}
-
-        <!-- navbar end -->
     </div>
 
 
