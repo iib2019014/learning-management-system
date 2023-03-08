@@ -120,16 +120,7 @@ def renderStudentLoginView(request) :
 
 
 
-def renderCoursesView(request) :
-    context = {}
 
-    # student = request.user.student
-
-    # courses = student.courses.all()
-
-    # context['courses'] = courses
-
-    return render(request, APPNAME + '/courses.html', context)
 
 
 
@@ -179,6 +170,21 @@ def renderAvailableCoursesView(request) :
 
 
 
+def renderCourseView(request, course_id) :
+    context = {}
+
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+
+    except Course.DoesNotExist :
+        return redirect('student-home')
+    
+    print(f'{course}')
+    context['course'] = course
+
+    return render(request, APPNAME + '/course.html', context)
 
 
 

@@ -54,3 +54,37 @@
     color: var(--clr-primary-400);
     background-color: var(--clr-primary-800);
 }
+
+
+
+
+
+
+/* courses start */
+
+.courses {
+    width: 100%;
+
+    float: left;
+}
+
+.course {
+    display: inline-flex;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: center;
+
+    width: 15rem;
+    height: 15rem;
+
+    margin: 0 4rem;
+
+    /* border: 1px solid red; */
+
+    color: var(--palatte-4);
+    background-color: var(--palatte-3);
+
+    font-family: var(--font-primary);
+}
+
+/* courses end */

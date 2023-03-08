@@ -3,7 +3,14 @@
 
 {% block content %}
 
-    {{courses}}
+    <div class="courses">
+        {% for course in courses %}
+            <a href="{% url 'course' course.id %}" class="course">
+                <div class="course-title">{{course.title}}</div>
+                <div class="course-faculty">{{course.faculty}}</div>
+            </a>
+        {% endfor %}
+    </div>
 
 
 {% endblock %}
