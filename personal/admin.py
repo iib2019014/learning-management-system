@@ -10,11 +10,11 @@ from .models import (
 
 
 class CourseAdmin(admin.ModelAdmin) :
-    list_display = ('code', 'title', 'department')
+    list_display = ('code', 'title', 'department', 'faculty')
 
-    search_fields = ('code', 'title', 'department')
+    search_fields = ('code', 'title', 'department', 'faculty')
 
-    ordering = ('code', 'title', 'department')
+    ordering = ('code', 'title', 'department', 'faculty')
 
     filter_horizontal				= ()
     list_filter                     = ()

@@ -1,6 +1,10 @@
 from django.db import models
 
 
+# from faculty.models import (
+    # Faculty,
+# )
+
 # Create your models here.
 
 MIN_CREDITS = 12
@@ -83,6 +87,8 @@ class Course(models.Model) :
     department = models.CharField(max_length=255, blank=False, choices=DEPARTMENT)
 
     credits = models.IntegerField(default=4)
+
+    faculty = models.ForeignKey('faculty.Faculty', null=True, on_delete=models.SET_NULL)
 
     def __str__(self) :
         return self.title

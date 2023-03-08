@@ -9,6 +9,7 @@ from .models import (
 )
 
 from personal.models import (
+    Course,
     FacultyRecord,
 )
 
@@ -27,7 +28,9 @@ def renderFacultyHomeView(request) :
     
     if request.user.is_authenticated :
         faculty = request.user.faculty
-        courses = faculty.courses.all()
+
+        # get the courses of a faculty (it is foreign key relation),
+        courses = faculty.course_set.all()
 
         context['courses'] = courses
 
@@ -113,6 +116,23 @@ def renderFacultyLoginView(request) :
         messages.error(request, 'Invalid Credentials!')
 
     return render(request, APPNAME + '/login.html', context)
+
+
+
+def renderCourseView(request, course_id) :
+    context = {}
+
+    try: 
+        course = Course.objects.get(id=course_id)
+
+    except :
+        return redirect('faculty-home')
+
+
+    # print(f'{course}')
+    context['course'] = course
+
+    return render(request, APPNAME + '/course.html', context)
 
 
 
