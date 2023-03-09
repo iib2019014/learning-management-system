@@ -187,6 +187,29 @@ def renderCourseView(request, course_id) :
     return render(request, APPNAME + '/course.html', context)
 
 
+def renderMaterialsView(request, course_id) :
+    if not request.user.is_authenticated :
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+
+    except Course.DoesNotExist :
+        return redirect('home')
+    
+    materials = course.material_set.all()
+
+    print(f'{materials}')
+
+    context['materials'] = materials
+
+
+    return render(request, APPNAME + '/materials.html', context)
+
+
 
 
 

@@ -4,7 +4,7 @@
     </div>
     <div class="nav-item">
         {% if request.user|isStudent %}
-            <a href="#">materials</a>
+            <a href="{% url 'student-materials' course.id %}">materials</a>
         {% else %}
             <a href="#">materials</a>
         {% endif %}

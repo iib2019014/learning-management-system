@@ -7,6 +7,7 @@ from .views import (
     # renderCoursesView,
     renderAvailableCoursesView,
     renderCourseView,
+    renderMaterialsView,
 )
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     # path('courses/', renderCoursesView, name='student-courses'),
     path('enrollment/', renderAvailableCoursesView, name='available-courses'),
     path('course/<str:course_id>', renderCourseView, name='course'),
+    path('materials/<str:course_id>', renderMaterialsView, name='student-materials'),
 ]
