@@ -196,6 +196,7 @@ def renderMaterialsView(request, course_id) :
 
     try :
         course = Course.objects.get(id=course_id)
+        context['course'] = course
 
     except Course.DoesNotExist :
         return redirect('home')

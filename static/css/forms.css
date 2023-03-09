@@ -1,9 +1,8 @@
 @import url(./globals.css);
 @import url(./variables.css);
 
-/* login start */
 
-.login-div {
+.login-div, .create-material-div {
     width: 50%;
 
     margin: auto;
@@ -17,21 +16,16 @@
     font-family: var(--font-primary);
 }
 
-.login-form {
+.login-form, .create-material-form {
     display: flex;
     flex-direction: column;
     
     padding: .5rem;
     
     border-radius: 10px;
-
-    
-    /* background-color: var(--clr-primary-700); */
-
-    /* box-shadow: 5px 5px 5px 1px var(--clr-primary-500); */
 }
 
-.login-form label {
+.login-form label, .create-material-from label {
     margin: .5rem 0 0 0;
 
     font-size: 1.5rem;
@@ -42,7 +36,7 @@
     margin: auto;
 }
 
-.login-form button {
+.login-form button, .create-material-form button{
     margin: 5rem;
 
     width: 75%;
@@ -54,12 +48,10 @@
     background-color: var(--clr-primary-700);
 }
 
-.login-form button:hover {
+.login-form button:hover, .create-material-form button:hover {
     background-color: var(--clr-primary-800);
 
 }
-
-/* login end */
 
 
 

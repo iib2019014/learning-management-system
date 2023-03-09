@@ -1,0 +1,14 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    {% for material in materials %}
+        {{material}}
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,77 @@
+@import url(./globals.css);
+@import url(./variables.css);
+
+
+.login-div, .create-material-div {
+    width: 50%;
+
+    margin: auto;
+    padding: 2rem;
+
+    border-radius: 10px;
+
+    color: var(--clr-primary-100);
+    background-color: var(--clr-primary-300);
+
+    font-family: var(--font-primary);
+}
+
+.login-form, .create-material-form {
+    display: flex;
+    flex-direction: column;
+    
+    padding: .5rem;
+    
+    border-radius: 10px;
+}
+
+.login-form label, .create-material-from label {
+    margin: .5rem 0 0 0;
+
+    font-size: 1.5rem;
+}
+
+.form-group {
+    width: 75%;
+    margin: auto;
+}
+
+.login-form button, .create-material-form button{
+    margin: 5rem;
+
+    width: 75%;
+    margin: .5rem auto;
+
+    font-size: 1.5rem;
+
+    color: var(--clr-primary-100);
+    background-color: var(--clr-primary-700);
+}
+
+.login-form button:hover, .create-material-form button:hover {
+    background-color: var(--clr-primary-800);
+
+}
+
+
+
+
+/* error messages start */
+
+.errors {
+    width: 30%;
+
+    margin: 1rem auto;
+    padding: .5rem;
+
+    border-radius: 5px;
+
+    font-size: 1.2rem;
+
+    color: var(--clr-primary-500);
+    background-color: var(--clr-primary-900);
+
+    font-family: var(--font-alert);
+}
+
+/* error messages end */

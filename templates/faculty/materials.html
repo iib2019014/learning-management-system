@@ -1,0 +1,22 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="add-material">
+        <a href="{% url 'create-material' course.id %}" class="link-primary">add material</a>
+    </div>
+
+    <div class="material">
+        {% for material in materials %}
+            <div class="material">
+                {{material}}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

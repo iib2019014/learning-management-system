@@ -1,0 +1,22 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="create-material-div">
+        <form action="" method="post" class="create-material-form">
+            {% for field in materialForm %}
+                <div class="form-group">
+                    {{field.label_tag}}
+                    {{field}}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">add</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -8,6 +8,10 @@ from .models import (
     Faculty,
 )
 
+from student.views import (
+    isStudent,
+)
+
 from personal.models import (
     Course,
     FacultyRecord,
@@ -15,6 +19,10 @@ from personal.models import (
 
 from .forms import (
     FacultyForm,
+)
+
+from course.forms import (
+    MaterialForm,
 )
 
 
@@ -133,6 +141,59 @@ def renderCourseView(request, course_id) :
     context['course'] = course
 
     return render(request, APPNAME + '/course.html', context)
+
+
+def renderMaterialsView(request, course_id) :
+    if not request.user.is_authenticated :
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+
+    except Course.DoesNotExist :
+        return redirect('home')
+    
+    materials = course.material_set.all()
+
+    print(f'{materials}')
+
+    context['materials'] = materials
+
+
+    return render(request, APPNAME + '/materials.html', context)
+
+
+
+def renderCreateMaterialView(request, course_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+
+    except Course.DoesNotExist :
+        return redirect('faculty-home')
+
+    if request.method == 'POST' :
+        pass
+    
+
+
+    materialForm = MaterialForm()
+    context['materialForm'] = materialForm
+
+    return render(request, APPNAME + '/createMaterial.html', context)
+
+
 
 
 
