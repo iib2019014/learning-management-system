@@ -20,7 +20,7 @@ class Material(models.Model) :
 
     course = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)
 
-    material_type = models.CharField(max_length=10, choices=MATERIAL_TYPE)
+    material_type = models.CharField(max_length=10, choices=MATERIAL_TYPE, blank=False)
 
     link = models.CharField(max_length=255, blank=True)
 

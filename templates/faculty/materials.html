@@ -8,13 +8,18 @@
 {% block content %}
 
     <div class="add-material">
-        <a href="{% url 'create-material' course.id %}" class="link-primary">add material</a>
+        <a href="{% url 'create-material' course.id %}">add material</a>
     </div>
 
-    <div class="material">
+    <div class="materials">
         {% for material in materials %}
             <div class="material">
-                {{material}}
+                <p class="material-name">{{material.name}}</p>
+                {% if material.type == 'link' %}
+                    <a href={{material.link}} class="material-link">Go to file</a>
+                {% else %}
+                    {{material.file}}
+                {% endif %}
             </div>
         {% endfor %}
     </div>

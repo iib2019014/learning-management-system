@@ -21,6 +21,10 @@ from .forms import (
     FacultyForm,
 )
 
+from course.models import (
+    Material,
+)
+
 from course.forms import (
     MaterialForm,
 )
@@ -184,8 +188,22 @@ def renderCreateMaterialView(request, course_id) :
         return redirect('faculty-home')
 
     if request.method == 'POST' :
-        pass
-    
+        materialForm = MaterialForm(request.POST)
+
+        if materialForm.is_valid() :
+            
+            Material.objects.create(
+                name=request.POST.get('name'),
+                course=course,
+                material_type=request.POST.get('material_type'),
+                link=request.POST.get('link'),
+                file=request.POST.get('file')
+            )
+
+            messages.success(request, 'Material added successfully!')
+
+            return redirect('faculty-materials', course_id=course_id)
+        
 
 
     materialForm = MaterialForm()
