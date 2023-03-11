@@ -1,0 +1,30 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="add-assignment">
+        <a href="{% url 'create-assignment' course.id %}">add assignment</a>
+    </div>
+
+    <div class="assignments">
+        {% for assignment in assignments %}
+            <div class="assignment">
+                <p class="assignment-name">{{assignment.name}}</p>
+                {% if assignment.file %}
+                    <a href={{assignment.file.url}} target="_blank" class="assignment-link">Go to file</a>
+                {% endif %}
+
+                <div class="assignment-actions">
+                    <a href="{% url 'edit-assignment' assignment.id %}" class="btn btn-info">edit</a>
+                    <a href="{% url 'delete-assignment' assignment.id %}" class="btn btn-danger">delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

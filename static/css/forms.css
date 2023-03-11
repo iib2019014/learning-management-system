@@ -2,7 +2,7 @@
 @import url(./variables.css);
 
 
-.login-div, .create-material-div {
+.login-div, .create-material-div, .create-assignment-div {
     width: 50%;
 
     margin: auto;
@@ -16,7 +16,7 @@
     font-family: var(--font-primary);
 }
 
-.login-form, .create-material-form {
+.login-form, .create-material-form, .create-assignment-form {
     display: flex;
     flex-direction: column;
     
@@ -25,7 +25,7 @@
     border-radius: 10px;
 }
 
-.login-form label, .create-material-from label {
+.login-form label, .create-material-from label, .create-assignment-form label {
     margin: .5rem 0 0 0;
 
     font-size: 1.5rem;
@@ -36,7 +36,7 @@
     margin: auto;
 }
 
-.login-form button, .create-material-form button{
+.login-form button, .create-material-form button, .create-assignment-form button {
     margin: 5rem;
 
     width: 75%;
@@ -48,7 +48,7 @@
     background-color: var(--clr-primary-700);
 }
 
-.login-form button:hover, .create-material-form button:hover {
+.login-form button:hover, .create-material-form button:hover, .create-assignment-form button:hover{
     background-color: var(--clr-primary-800);
 
 }

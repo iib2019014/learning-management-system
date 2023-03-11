@@ -2,6 +2,7 @@ from django import forms
 
 from course.models import (
     Material,
+    Assignment,
 
     MATERIAL_TYPE,
 )
@@ -16,3 +17,13 @@ class MaterialForm(forms.ModelForm) :
     class Meta :
         model = Material
         fields = ('name', 'material_type', 'link', 'file')
+
+
+class AssignmentForm(forms.ModelForm) :
+
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    file = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control'}), required=True)
+
+    class Meta :
+        model = Assignment
+        fields = ('name', 'file')

@@ -103,7 +103,7 @@
 
 /* materials start */
 
-.add-material {    
+.add-material, .add-assignment {    
     width: 50%;
 
     margin: 2rem auto;
@@ -121,11 +121,11 @@
     border-radius: 10px;
 }
 
-.add-material a {
+.add-material a, .add-assignment a {
     color: var(--palatte-1);
 }
 
-.materials {    
+.materials, .assignments {    
     width: 50%;
 
     margin: 2rem auto;
@@ -133,7 +133,7 @@
     font-family: var(--font-primary);
 }
 
-.material {
+.material, .assignment {
     margin: 1rem 0;
     padding: 0.5rem;
 

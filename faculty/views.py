@@ -22,10 +22,12 @@ from .forms import (
 )
 
 from course.models import (
+    Assignment,
     Material,
 )
 
 from course.forms import (
+    AssignmentForm,
     MaterialForm,
 )
 
@@ -59,7 +61,7 @@ def renderFacultyRegistrationView(request) :
 
         if facultyRegisterForm.is_valid() :
             
-            # check if a facultyrecord with the given exists,
+            # check if a FacultyRecord with the given exists,
             email = request.POST['email']
 
             try :
@@ -147,6 +149,21 @@ def renderCourseView(request, course_id) :
     return render(request, APPNAME + '/course.html', context)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# material views start
+
 def renderMaterialsView(request, course_id) :
     if not request.user.is_authenticated :
         return redirect('home')
@@ -174,6 +191,7 @@ def renderMaterialsView(request, course_id) :
 
 def renderCreateMaterialView(request, course_id) :
     if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
         return redirect('home')
     
     context = {}
@@ -216,6 +234,7 @@ def renderCreateMaterialView(request, course_id) :
 
 def renderEditMaterialView(request, material_id) :
     if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
         return redirect('home')
     
     material = None
@@ -253,6 +272,7 @@ def renderEditMaterialView(request, material_id) :
 
 def renderDeleteMaterialView(request, material_id) :
     if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
         return redirect('home')
     
     material = None
@@ -275,6 +295,151 @@ def renderDeleteMaterialView(request, material_id) :
     return render(request, APPNAME + '/confirmDelete.html', context)
 
 
+# material views end
+
+
+
+
+
+
+
+
+
+
+
+# assignment views start
+
+
+def renderAssignmentsView(request, course_id) :
+    if not request.user.is_authenticated :
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+
+    except Course.DoesNotExist :
+        return redirect('home')
+    
+    assignments = course.assignment_set.all()
+
+    print(f'{assignments}')
+
+    context['assignments'] = assignments
+
+
+    return render(request, APPNAME + '/assignments.html', context)
+
+
+
+def renderCreateAssignmentView(request, course_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+
+    except Course.DoesNotExist :
+        return redirect('faculty-home')
+
+    if request.method == 'POST' :
+        assignmentForm = AssignmentForm(request.POST, request.FILES)
+        print(f'{request.FILES}')
+
+        if assignmentForm.is_valid() :
+            
+            assignment = Assignment.objects.create(
+                name=request.POST.get('name'),
+                course=course,
+                file=request.FILES['file']
+            )
+            assignment.save()
+
+            messages.success(request, 'assignment added successfully!')
+
+            return redirect('faculty-assignments', course_id=course_id)
+        
+
+
+    assignmentForm = AssignmentForm()
+    context['assignmentForm'] = assignmentForm
+
+    return render(request, APPNAME + '/createAssignment.html', context)
+
+
+
+def renderEditAssignmentView(request, assignment_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
+        return redirect('home')
+    
+    assignment = None
+    context = {}
+
+    try :
+        assignment = Assignment.objects.get(id=assignment_id)
+
+    except Assignment.DoesNotExist :
+        return redirect('faculty-home')
+    
+    context['course'] = assignment.course
+    
+    if request.method == 'POST' :
+        assignmentForm = AssignmentForm(request.POST, request.FILES)
+
+        if assignmentForm.is_valid() :
+
+            assignment.name = request.POST.get('name')
+            assignment.file = request.FILES['file']
+
+            assignment.save()
+
+            return redirect('faculty-assignments', course_id=assignment.course.id)
+    
+
+    assignmentForm = AssignmentForm(instance=assignment)
+    context['assignmentForm'] = assignmentForm
+
+    return render(request, APPNAME + '/editAssignment.html', context)
+
+
+
+def renderDeleteAssignmentView(request, assignment_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
+        return redirect('home')
+    
+    assignment = None
+    context = {}
+
+    try :
+        assignment = Assignment.objects.get(id=assignment_id)
+
+    except Assignment.DoesNotExist :
+        return redirect('faculty-home')
+    
+    context['course'] = assignment.course
+    
+    if request.method == 'POST' :
+        if 'confirm' in request.POST :
+            assignment.delete()
+        return redirect('faculty-assignments', course_id=assignment.course.id)
+
+
+    return render(request, APPNAME + '/confirmDelete.html', context)
+
+
+
+# assignment views end
 
 
 @register.filter

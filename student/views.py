@@ -216,6 +216,7 @@ def renderMaterialsView(request, course_id) :
 
 
 
+
 @register.filter
 def isStudent(user) :
     # print(user)

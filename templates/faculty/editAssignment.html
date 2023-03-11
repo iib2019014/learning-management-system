@@ -1,0 +1,22 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="create-assignment-div">
+        <form action="" method="post" enctype="multipart/form-data" class="create-assignment-form"> {% csrf_token %}
+            {% for field in assignmentForm %}
+                <div class="form-group">
+                    {{field.label_tag}}
+                    {{field}}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">confirm</button>
+        </form>
+    </div>
+
+{% endblock %}

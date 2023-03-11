@@ -3,6 +3,8 @@
 
 {% block content %}
 
+    {% include 'personal/errors.html' %}
+
     <div class="courses">
         {% for course in courses %}
             <a href="{% url 'course' course.id %}" class="course">

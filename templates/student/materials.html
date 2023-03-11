@@ -7,8 +7,18 @@
 
 {% block content %}
 
-    {% for material in materials %}
-        {{material}}
-    {% endfor %}
+    <div class="materials">
+        {% for material in materials %}
+            <div class="material">
+                <p class="material-name">{{material.name}}</p>
+                {% if material.material_type == 'link' %}
+                    <a href={{material.link}} target="_blank" class="material-link">Go to file</a>
+                {% else %}
+                    <a href={{material.file.url}} target="_blank" class="material-link">Go to file</a>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

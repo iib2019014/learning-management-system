@@ -13,7 +13,7 @@
         {% if request.user|isStudent %}
             <a href="#">assignments</a>
         {% else %}
-            <a href="#">assignments</a>
+            <a href="{% url 'faculty-assignments' course.id %}">assignments</a>
         {% endif %}
     </div>
     <div class="nav-item">
