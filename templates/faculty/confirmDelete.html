@@ -1,0 +1,15 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <form action="" method="post"> {% csrf_token %}
+        <button type="submit" name="cancel" class="btn btn-info">cancel</button>
+        <button type="submit" name="confirm" class="btn btn-danger">confirm</button>
+    </form>
+
+{% endblock %}

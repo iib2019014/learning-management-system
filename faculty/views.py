@@ -188,17 +188,19 @@ def renderCreateMaterialView(request, course_id) :
         return redirect('faculty-home')
 
     if request.method == 'POST' :
-        materialForm = MaterialForm(request.POST)
+        materialForm = MaterialForm(request.POST, request.FILES)
+        print(f'{request.FILES}')
 
         if materialForm.is_valid() :
             
-            Material.objects.create(
+            material = Material.objects.create(
                 name=request.POST.get('name'),
                 course=course,
                 material_type=request.POST.get('material_type'),
                 link=request.POST.get('link'),
-                file=request.POST.get('file')
+                file=request.FILES['file']
             )
+            material.save()
 
             messages.success(request, 'Material added successfully!')
 
@@ -211,6 +213,66 @@ def renderCreateMaterialView(request, course_id) :
 
     return render(request, APPNAME + '/createMaterial.html', context)
 
+
+def renderEditMaterialView(request, material_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        return redirect('home')
+    
+    material = None
+    context = {}
+
+    try :
+        material = Material.objects.get(id=material_id)
+
+    except Material.DoesNotExist :
+        return redirect('faculty-home')
+    
+    context['course'] = material.course
+    
+    if request.method == 'POST' :
+        materialForm = MaterialForm(request.POST)
+
+        if materialForm.is_valid() :
+
+            material.name = request.POST.get('name')
+            material.material_type = request.POST.get('material_type')
+            material.link = request.POST.get('link')
+            material.file = request.POST.get('file')
+
+            material.save()
+
+            return redirect('faculty-materials', course_id=material.course.id)
+    
+
+    materialForm = MaterialForm(instance=material)
+    context['materialForm'] = materialForm
+
+    return render(request, APPNAME + '/editMaterial.html', context)
+
+
+
+def renderDeleteMaterialView(request, material_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        return redirect('home')
+    
+    material = None
+    context = {}
+
+    try :
+        material = Material.objects.get(id=material_id)
+
+    except Material.DoesNotExist :
+        return redirect('faculty-home')
+    
+    context['course'] = material.course
+    
+    if request.method == 'POST' :
+        if 'confirm' in request.POST :
+            material.delete()
+        return redirect('faculty-materials', course_id=material.course.id)
+
+
+    return render(request, APPNAME + '/confirmDelete.html', context)
 
 
 

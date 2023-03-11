@@ -7,6 +7,8 @@ from .views import (
     renderCourseView,
     renderMaterialsView,
     renderCreateMaterialView,
+    renderEditMaterialView,
+    renderDeleteMaterialView,
 )
 
 urlpatterns = [
@@ -16,4 +18,6 @@ urlpatterns = [
     path('course/<str:course_id>', renderCourseView, name='faculty-course'),
     path('materials/<str:course_id>', renderMaterialsView, name='faculty-materials'),
     path('create-material/<str:course_id>', renderCreateMaterialView, name='create-material'),
+    path('edit-material/<str:material_id>', renderEditMaterialView, name='edit-material'),
+    path('delete-material/<str:material_id>', renderDeleteMaterialView, name='delete-material'),
 ]

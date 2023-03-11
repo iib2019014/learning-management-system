@@ -8,14 +8,14 @@
 {% block content %}
 
     <div class="create-material-div">
-        <form action="" method="post" enctype="multipart/form-data" class="create-material-form"> {% csrf_token %}
+        <form action="" method="post" class="create-material-form"> {% csrf_token %}
             {% for field in materialForm %}
                 <div class="form-group">
                     {{field.label_tag}}
                     {{field}}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">add</button>
+            <button type="submit" class="btn btn-primary">confirm</button>
         </form>
     </div>
 

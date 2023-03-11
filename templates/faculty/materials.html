@@ -15,11 +15,16 @@
         {% for material in materials %}
             <div class="material">
                 <p class="material-name">{{material.name}}</p>
-                {% if material.type == 'link' %}
-                    <a href={{material.link}} class="material-link">Go to file</a>
+                {% if material.material_type == 'link' %}
+                    <a href={{material.link}} target="_blank" class="material-link">Go to file</a>
                 {% else %}
-                    {{material.file}}
+                    <a href={{material.file.url}} target="_blank" class="material-link">Go to file</a>
                 {% endif %}
+
+                <div class="material-actions">
+                    <a href="{% url 'edit-material' material.id %}" class="btn btn-info">edit</a>
+                    <a href="{% url 'delete-material' material.id %}" class="btn btn-danger">delete</a>
+                </div>
             </div>
         {% endfor %}
     </div>

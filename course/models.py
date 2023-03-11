@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 
 
@@ -14,6 +16,11 @@ MATERIAL_TYPE = (
 # Create your models here.
 
 
+def custom_upload_to_materials(instance, filename) :
+    print("yay")
+    return os.path.join(instance.course.code + '/materials/', filename)
+
+
 class Material(models.Model) :
 
     name = models.CharField(max_length=255, blank=False)
@@ -24,7 +31,7 @@ class Material(models.Model) :
 
     link = models.CharField(max_length=255, blank=True)
 
-    file = models.FileField(blank=True)
+    file = models.FileField(blank=True, upload_to=custom_upload_to_materials)
 
     # def __str__(self) :
     #     return 
