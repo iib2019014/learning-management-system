@@ -8,6 +8,10 @@ from .models import (
     Faculty,
 )
 
+from student.models import (
+    Submission,
+)
+
 from student.views import (
     isStudent,
 )
@@ -368,6 +372,16 @@ def renderCreateAssignmentView(request, course_id) :
 
             messages.success(request, 'assignment added successfully!')
 
+
+            # for all students in this course, create a submission object with this assignment
+
+            students = course.student_set.all()
+            for student in students :
+                submission = Submission.objects.create(
+                    student=student,
+                    assignment=assignment,
+                )
+
             return redirect('faculty-assignments', course_id=course_id)
         
 
@@ -436,6 +450,11 @@ def renderDeleteAssignmentView(request, assignment_id) :
     if request.method == 'POST' :
         if 'confirm' in request.POST :
             assignment.delete()
+
+            # all the submissions for this assignment must also be deleted,
+            submissions = assignment.submission_set.all()
+            for submission in submissions :
+                submission.delete()
         return redirect('faculty-assignments', course_id=assignment.course.id)
 
 
