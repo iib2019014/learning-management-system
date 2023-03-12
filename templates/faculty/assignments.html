@@ -18,6 +18,8 @@
                 {% if assignment.file %}
                     <a href={{assignment.file.url}} target="_blank" class="assignment-link">Go to file</a>
                 {% endif %}
+                <p class="assignment-deadline">deadline: <b>{{assignment.deadline}}</b></p>
+                <p class="assignment-marks">marks: <b>{{assignment.marks}}</b></p>
 
                 <div class="assignment-actions">
                     <a href="{% url 'edit-assignment' assignment.id %}" class="btn btn-info">edit</a>

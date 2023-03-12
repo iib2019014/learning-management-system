@@ -326,7 +326,7 @@ def renderAssignmentsView(request, course_id) :
     
     assignments = course.assignment_set.all()
 
-    print(f'{assignments}')
+    # print(f'{assignments}')
 
     context['assignments'] = assignments
 
@@ -360,7 +360,9 @@ def renderCreateAssignmentView(request, course_id) :
             assignment = Assignment.objects.create(
                 name=request.POST.get('name'),
                 course=course,
-                file=request.FILES['file']
+                file=request.FILES['file'],
+                marks=request.POST.get('marks'),
+                deadline=request.POST.get('deadline'),
             )
             assignment.save()
 
@@ -400,6 +402,8 @@ def renderEditAssignmentView(request, assignment_id) :
 
             assignment.name = request.POST.get('name')
             assignment.file = request.FILES['file']
+            assignment.marks=request.POST.get('marks')
+            assignment.deadline=request.POST.get('deadline')
 
             assignment.save()
 

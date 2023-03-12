@@ -1,6 +1,6 @@
 <div class="navbar">
     <div class="nav-item">
-        <a href="#">courses</a>
+        <a href="{% url 'home' %}">courses</a>
     </div>
     <div class="nav-item">
         {% if request.user|isStudent %}

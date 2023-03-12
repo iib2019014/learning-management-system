@@ -23,7 +23,9 @@ class AssignmentForm(forms.ModelForm) :
 
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     file = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control'}), required=True)
+    marks = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    deadline = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
 
     class Meta :
         model = Assignment
-        fields = ('name', 'file')
+        fields = ('name', 'file', 'marks', 'deadline')

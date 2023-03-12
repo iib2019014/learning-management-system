@@ -1,3 +1,8 @@
+# from datetime import datetime
+# datetime.now() gives timezone unaware object
+from datetime import date
+from django.utils import timezone
+# timezone.now() gives timezone aware object
 import os
 
 from django.db import models
@@ -48,6 +53,10 @@ class Assignment(models.Model) :
     course = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)
 
     file = models.FileField(upload_to=custom_upload_to_assignments)
+
+    deadline = models.DateField(default=date.today)
+
+    marks = models.IntegerField(default=10)
 
     def __str__(self) :
         return f'assignment {self.id}, {self.course}'
