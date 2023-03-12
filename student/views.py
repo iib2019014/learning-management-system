@@ -4,9 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.template.defaulttags import register
 from django.contrib import messages
 
+from course.models import Assignment
+
 
 from .models import (
     Student,
+    Submission,
 )
 
 from personal.models import (
@@ -235,9 +238,58 @@ def renderAssignmentsView(request, course_id) :
 
     context['assignments'] = assignments
 
+    submitteds, lates = [], []
+
+
+    # for each assignment, get the submission object and store the value of submitted and late
+    for assignment in assignments :
+        submission = Submission.objects.get(assignment=assignment, student=request.user.student)
+        submitteds.append(submission.submitted)
+        lates.append(submission.late)
+
+    # the values of submitted and late can be given to template in this way or we can use the method like how we get the isStudent value
+    # i.e. request.user.student|submitted
+
+
+    assignments_submissions = zip(assignments, submitteds, lates)
+
+    context['assignments_submissions'] = assignments_submissions
+
 
     return render(request, APPNAME + '/assignments.html', context)
 
+
+def renderAssignmentSubmissionView(request, assignment_id) :
+    if not request.user.is_authenticated or not isStudent(request.user) :
+        messages.error(request, 'You are not allowed to perform this operation!')
+        return redirect('home')
+    
+    context = {}
+    assignment = None
+
+    try :
+        assignment = Assignment.objects.get(id=assignment_id)
+        context['assignment'] = assignment
+        course = assignment.course
+        context['course'] = course
+
+    except Assignment.DoesNotExist :
+        return redirect('home')
+    
+
+    if request.method == 'POST' :
+        submission = Submission.objects.get(student=request.user.student, assignment=assignment)
+
+        submission.answer_file = request.FILES['answer_file']
+        submission.submitted = True
+
+        submission.save()
+
+        messages.success(request, 'Assignment submitted successfully!')
+
+        return redirect('student-assignments', course_id=course.id)
+
+    return render(request, APPNAME + '/submitAssignment.html', context)
 
 
 

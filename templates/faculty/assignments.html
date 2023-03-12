@@ -13,7 +13,7 @@
 
     <div class="assignments">
         {% for assignment in assignments %}
-            <div class="assignment">
+            <div class="assignment" style="flex-direction: column;">
                 <p class="assignment-name">{{assignment.name}}</p>
                 {% if assignment.file %}
                     <a href={{assignment.file.url}} target="_blank" class="assignment-link">Go to file</a>

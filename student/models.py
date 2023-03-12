@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -13,6 +14,8 @@ from personal.models import (
 
 # Create your models here.
 
+def custom_upload_to_answers(instance, filename) :
+    return os.path.join(instance.assignment.course.code + '/answers/' + instance.student.record.rollno + '/', filename)
 
 
 class Student(models.Model) :
@@ -37,6 +40,8 @@ class Submission(models.Model) :
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
 
     assignment = models.ForeignKey(Assignment, null=True, on_delete=models.SET_NULL)
+
+    answer_file = models.FileField(upload_to=custom_upload_to_answers, blank=True)
 
     submitted = models.BooleanField(default=False)
 

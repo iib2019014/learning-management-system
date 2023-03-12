@@ -1,0 +1,21 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="login-div">
+        <p class="" style="color: var(--palatte-1); font-size: 1.5rem; text-align: center;">Assignment name: <b>{{assignment.name}}</b></p>
+        <form class="login-form" action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
+            <div class="form-group">
+                <input type="file" class="form-control" name="answer_file" id="answer_file">
+            </div>
+            
+            <button type="submit" class="btn">submit</button>
+        </form>
+    </div>
+    
+{% endblock %}
