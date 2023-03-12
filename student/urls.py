@@ -8,6 +8,7 @@ from .views import (
     renderAvailableCoursesView,
     renderCourseView,
     renderMaterialsView,
+    renderAssignmentsView,
 )
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
     path('enrollment/', renderAvailableCoursesView, name='available-courses'),
     path('course/<str:course_id>', renderCourseView, name='course'),
     path('materials/<str:course_id>', renderMaterialsView, name='student-materials'),
+    path('assignments/<str:course_id>', renderAssignmentsView, name='student-assignments'),
 ]

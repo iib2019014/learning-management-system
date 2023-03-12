@@ -145,3 +145,59 @@
 
 
 /* materials end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* assignment start */
+
+.assignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.assignment-details {
+    flex: 4;
+}
+
+.assignment-status {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.submitted {
+    color: green;
+    background-color: rgb(144, 255, 144);
+}
+
+.pending {
+    color: orange;
+    background-color: rgb(255, 214, 144);
+}
+
+.late {
+    color: red;
+    background-color: rgb(255, 142, 144);
+}
+
+
+
+/* assignment end */

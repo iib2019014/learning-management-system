@@ -1,0 +1,46 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="assignments">
+        {% for assignment in assignments %}
+            <div class="assignment">
+                <div class="assignment-details">
+                    <p class="assignment-name">{{assignment.name}}</p>
+                    {% if assignment.assignment_type == 'link' %}
+                        <a href={{assignment.link}} target="_blank" class="assignment-link btn btn-primary">Go to file</a>
+                    {% else %}
+                        <a href={{assignment.file.url}} target="_blank" class="assignment-link btn btn-primary">Go to file</a>
+                    {% endif %}
+                    <p class="assignment-deadline">deadline: <b>{{assignment.deadline}}</b></p>
+                    <p class="assignment-marks">marks: <b>{{assignment.marks}}</b></p>
+                </div>
+
+                {% if assignment.submitted %}
+                    <div class="assignment-status submitted">
+                        submitted
+                    </div>
+
+                    {% else %}
+
+                    <div class="assignment-status pending">
+                        pending
+                    </div>
+                {% endif %}
+
+                {% if assignment.late %}
+                    <div class="assignment-status late">
+                        late
+                    </div>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

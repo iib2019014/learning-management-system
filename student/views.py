@@ -212,7 +212,31 @@ def renderMaterialsView(request, course_id) :
 
 
 
+def renderAssignmentsView(request, course_id) :
+    if not request.user.is_authenticated or not isStudent(request.user) :
+        messages.error(request, 'You are not allowed to perform this operation!')
+        return redirect('home')
+    
 
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+
+    except Course.DoesNotExist :
+        return redirect('home')
+
+
+    assignments = course.assignment_set.all()
+
+    print(f'{assignments}')
+
+    context['assignments'] = assignments
+
+
+    return render(request, APPNAME + '/assignments.html', context)
 
 
 
