@@ -28,5 +28,11 @@
     background-color: var(--palatte-1);
 }
 
+.nav-item h4 {
+    color: var(--palatte-3);
+
+    margin: 0;
+}
+
 /* navbar end */
 
