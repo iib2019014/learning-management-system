@@ -201,3 +201,46 @@
 
 
 /* assignment end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* people start */
+
+.course-faculty {
+    width: 50%;
+
+    margin: 0 auto;
+    padding: 1rem;
+
+    font-family: var(--font-primary);
+
+    color: var(--clr-primary-900);
+    background-color: var(--clr-primary-200);
+}
+
+.course-classmate {
+    width: 50%;
+
+    margin: 0 auto;
+    padding: 1rem;
+
+    font-family: var(--font-primary);
+
+    color: var(--clr-grey-600);
+    background-color: var(--clr-grey-400);
+}
+
+/* people end */

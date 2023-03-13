@@ -190,6 +190,27 @@ def renderCourseView(request, course_id) :
     return render(request, APPNAME + '/course.html', context)
 
 
+def renderClassPeopleView(request, course_id) :
+    if not request.user.is_authenticated or not isStudent(request.user) :
+        messages.error(request, 'You are not allowed to perform this operation!')
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+
+    except Course.DoesNotExist :
+        return redirect('home')
+    
+    classmates = course.student_set.all()
+    context['classmates'] = classmates
+
+    return render(request, APPNAME + '/people.html', context)
+
+
 def renderMaterialsView(request, course_id) :
     if not request.user.is_authenticated :
         return redirect('home')

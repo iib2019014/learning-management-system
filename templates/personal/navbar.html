@@ -30,4 +30,11 @@
             <a href="#">feedbacks</a>
         {% endif %}
     </div>
+    <div class="nav-item">
+        {% if request.user|isStudent %}
+            <a href="{% url 'people' course.id %}">people</a>
+        {% else %}
+            <a href="#">people</a>
+        {% endif %}
+    </div>
 </div>
