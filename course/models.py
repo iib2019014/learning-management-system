@@ -29,6 +29,9 @@ def custom_upload_to_materials(instance, filename) :
 def custom_upload_to_assignments(instance, filename) :
     return os.path.join(instance.course.code + '/assignments/', filename)
 
+def custom_upload_to_attendances(instance, filename) :
+    return os.path.join(instance.course.code + '/attendances/', filename)
+
 
 class Material(models.Model) :
 
@@ -60,3 +63,16 @@ class Assignment(models.Model) :
 
     def __str__(self) :
         return f'assignment {self.id}, {self.course}'
+    
+
+
+class Attendance(models.Model) :
+
+    course = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)
+
+    date = models.DateField(auto_now_add=True)
+
+    file = models.FileField(upload_to=custom_upload_to_attendances)
+
+    def __str__(self) :
+        return f'attendance {self.date}, {self.course}'

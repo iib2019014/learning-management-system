@@ -488,6 +488,52 @@ def renderClassPeopleView(request, course_id) :
     return render(request, APPNAME + '/people.html', context)
 
 
+
+
+def renderAttendancesView(request, course_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, 'You are not allowed to perform this operation!')
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+    except Course.DoesNotExist :
+        return redirect('home')
+    
+    attendances = course.attendance_set.all()
+    context['attendances'] = attendances
+
+    return render(request, APPNAME + '/attendances.html', context)
+
+
+def renderCreateAttendanceView(request, course_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, 'You are not allowed to perform this operation!')
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+    except Course.DoesNotExist :
+        return redirect('home')
+    
+    if request.method == 'POST' :
+        pass
+
+    students = course.student_set.all()
+    context['students'] = students
+
+    return render(request, APPNAME + '/createAttendance.html', context)
+
+
+
 @register.filter
 def isFaculty(user) :
     print(user)

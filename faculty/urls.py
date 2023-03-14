@@ -16,6 +16,9 @@ from .views import (
     renderCreateAssignmentView,
     renderEditAssignmentView,
     renderDeleteAssignmentView,
+
+    renderAttendancesView,
+    renderCreateAttendanceView,
 )
 
 urlpatterns = [
@@ -38,5 +41,9 @@ urlpatterns = [
     path('create-assignment/<str:course_id>', renderCreateAssignmentView, name='create-assignment'),
     path('edit-assignment/<str:assignment_id>', renderEditAssignmentView, name='edit-assignment'),
     path('delete-assignment/<str:assignment_id>', renderDeleteAssignmentView, name='delete-assignment'),
+
+
+    path('attendances/<str:course_id>', renderAttendancesView, name='faculty-attendances'),
+    path('create-attendance/<str:course_id>', renderCreateAttendanceView, name='create-attendance'),
 
 ]

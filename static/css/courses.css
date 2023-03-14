@@ -244,3 +244,43 @@
 }
 
 /* people end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* attendance start */
+
+.attendance-table {
+    width: 50%;
+
+    margin: 0 auto;
+
+    font-family: var(--font-primary);
+}
+
+.attendance-table td {
+}
+
+.attendance-table label {
+    margin: 0;
+    padding: 0;
+}
+
+.attendance-table input {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* attendance end */

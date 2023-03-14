@@ -11,7 +11,7 @@
     </div>
     <div class="nav-item">
         {% if request.user|isStudent %}
-        <a href="{% url 'student-assignments' course.id %}">assignments</a>
+            <a href="{% url 'student-assignments' course.id %}">assignments</a>
         {% else %}
             <a href="{% url 'faculty-assignments' course.id %}">assignments</a>
         {% endif %}
@@ -20,7 +20,7 @@
         {% if request.user|isStudent %}
             <a href="#">attendance</a>
         {% else %}
-            <a href="#">attendance</a>
+            <a href="{% url 'faculty-attendances' course.id %}">attendances</a>
         {% endif %}
     </div>
     <div class="nav-item">

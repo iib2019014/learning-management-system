@@ -1,0 +1,25 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="add-attendance">
+        <a href="{% url 'create-attendance' course.id %}">add attendance</a>
+    </div>
+
+    <div class="attendances">
+        {% for attendance in attendances %}
+            <div class="attendance" style="flex-direction: column;">
+                <p class="attendance-date">{{attendance.date}}</p>
+                {% if attendance.file %}
+                    <a href={{attendance.file.url}} target="_blank" class="attendance-link">check attendance</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
