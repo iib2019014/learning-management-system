@@ -1,0 +1,20 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="course-classmates">
+        {% for classmate in classmates %}
+            <div class="course-classmate">
+                <p>{{classmate.record.name}}</p>
+                <a href="mailto:{{classmate.record.email}}">{{classmate.record.email}}</a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

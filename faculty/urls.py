@@ -5,6 +5,8 @@ from .views import (
     renderFacultyRegistrationView,
     renderFacultyLoginView,
     renderCourseView,
+    renderClassPeopleView,
+    
     renderMaterialsView,
     renderCreateMaterialView,
     renderEditMaterialView,
@@ -23,6 +25,7 @@ urlpatterns = [
 
     
     path('course/<str:course_id>', renderCourseView, name='faculty-course'),
+    path('class/<str:course_id>', renderClassPeopleView, name='people'),
 
 
     path('materials/<str:course_id>', renderMaterialsView, name='faculty-materials'),

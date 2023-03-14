@@ -465,6 +465,29 @@ def renderDeleteAssignmentView(request, assignment_id) :
 # assignment views end
 
 
+
+
+def renderClassPeopleView(request, course_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, 'You are not allowed to perform this operation!')
+        return redirect('home')
+    
+    context = {}
+    course = None
+
+    try :
+        course = Course.objects.get(id=course_id)
+        context['course'] = course
+
+    except Course.DoesNotExist :
+        return redirect('home')
+    
+    students = course.student_set.all()
+    context['students'] = students
+
+    return render(request, APPNAME + '/people.html', context)
+
+
 @register.filter
 def isFaculty(user) :
     print(user)

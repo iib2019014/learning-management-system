@@ -34,7 +34,7 @@
         {% if request.user|isStudent %}
             <a href="{% url 'people' course.id %}">people</a>
         {% else %}
-            <a href="#">people</a>
+            <a href="{% url 'people' course.id %}">people</a>
         {% endif %}
     </div>
 </div>
