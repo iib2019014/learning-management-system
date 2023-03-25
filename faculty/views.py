@@ -1,8 +1,15 @@
+import pandas as pd
+import csv
+import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.template.defaulttags import register
 from django.contrib import messages
+from django.core.files import File
+from django.utils import timezone
+
 
 from .models import (
     Faculty,
@@ -27,6 +34,7 @@ from .forms import (
 
 from course.models import (
     Assignment,
+    Attendance,
     Material,
 )
 
@@ -525,12 +533,66 @@ def renderCreateAttendanceView(request, course_id) :
         return redirect('home')
     
     if request.method == 'POST' :
-        pass
+        # print(f'{request.POST}')
+
+
+        students = course.student_set.all()
+
+
+        with open(str(datetime.date.today()) + '.csv', 'w') as attendance_file :
+            fields = ['name', 'rollno', 'attendance']
+            writer = csv.DictWriter(attendance_file, fieldnames=fields)
+            writer.writeheader()
+
+            for student in students :
+                if student.id in request.POST and request.POST[student.id][0] == 'yes' :
+                    writer.writerow({'name': student.record.name, 'rollno': student.record.rollno, 'attendance': 'yes'})
+                    line += 'yes'
+                else :
+                    writer.writerow({'name': student.record.name, 'rollno': student.record.rollno, 'attendance': 'no'})
+
+
+        with open(str(datetime.date.today()) + '.csv', 'r') as attendance_file :
+            attendance = Attendance.objects.create(
+                course=course,
+                file=File(attendance_file),
+            )
+
+        return redirect('faculty-attendances', course_id=course.id)
+
+
 
     students = course.student_set.all()
     context['students'] = students
 
     return render(request, APPNAME + '/createAttendance.html', context)
+
+
+
+def renderDeleteAttendanceView(request, attendance_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
+        return redirect('home')
+    
+    attendance = None
+    context = {}
+
+    try :
+        attendance = Attendance.objects.get(id=attendance_id)
+
+    except attendance.DoesNotExist :
+        return redirect('faculty-home')
+    
+    context['course'] = attendance.course
+    
+    if request.method == 'POST' :
+        if 'confirm' in request.POST :
+            attendance.delete()
+            
+        return redirect('faculty-attendances', course_id=attendance.course.id)
+
+
+    return render(request, APPNAME + '/confirmDelete.html', context)
 
 
 

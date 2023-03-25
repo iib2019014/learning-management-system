@@ -19,6 +19,7 @@ from .views import (
 
     renderAttendancesView,
     renderCreateAttendanceView,
+    renderDeleteAttendanceView,
 )
 
 urlpatterns = [
@@ -45,5 +46,6 @@ urlpatterns = [
 
     path('attendances/<str:course_id>', renderAttendancesView, name='faculty-attendances'),
     path('create-attendance/<str:course_id>', renderCreateAttendanceView, name='create-attendance'),
+    path('delete-attendance/<str:attendance_id>', renderDeleteAttendanceView, name='delete-attendance'),
 
 ]

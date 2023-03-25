@@ -103,7 +103,7 @@
 
 /* materials start */
 
-.add-material, .add-assignment {    
+.add-material, .add-assignment, .add-attendance {    
     width: 50%;
 
     margin: 2rem auto;
@@ -121,11 +121,11 @@
     border-radius: 10px;
 }
 
-.add-material a, .add-assignment a {
+.add-material a, .add-assignment a, .add-attendance a {
     color: var(--palatte-1);
 }
 
-.materials, .assignments {    
+.materials, .assignments, .attendances {    
     width: 50%;
 
     margin: 2rem auto;
@@ -133,7 +133,7 @@
     font-family: var(--font-primary);
 }
 
-.material, .assignment {
+.material, .assignment, .attendance {
     margin: 1rem 0;
     padding: 0.5rem;
 

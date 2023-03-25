@@ -30,8 +30,8 @@ class Student(models.Model) :
     enrolled = models.BooleanField(default=False)
 
 
-    def __str__(self) :
-        return self.record.name
+    # def __str__(self) :
+    #     return self.record.name
     
 
 

@@ -18,6 +18,10 @@
                 {% if attendance.file %}
                     <a href={{attendance.file.url}} target="_blank" class="attendance-link">check attendance</a>
                 {% endif %}
+
+                <div class="attendance-actions">
+                    <a href="{% url 'delete-attendance' attendance.id %}" class="btn btn-danger">delete</a>
+                </div>
             </div>
         {% endfor %}
     </div>

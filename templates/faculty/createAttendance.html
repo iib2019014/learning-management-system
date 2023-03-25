@@ -17,11 +17,11 @@
                         <td>{{student.record.rollno}}</td>
                         <td>
                             <label for="yes">yes</label>
-                            <input type="radio" value={{student.id}} name="attendance" id="yes">
+                            <input type="radio" value="yes" name={{student.id}} id="yes">
                         </td>
                         <td>
                             <label for="no">no</label>
-                            <input type="radio" value={{student.id}} name="attendance" id="no">
+                            <input type="radio" value="no" name={{student.id}} id="no">
                         </td>
                     </tr>
                 {% endfor %}
