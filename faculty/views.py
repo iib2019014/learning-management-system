@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import csv
 import datetime
@@ -557,6 +558,8 @@ def renderCreateAttendanceView(request, course_id) :
                 course=course,
                 file=File(attendance_file),
             )
+
+        os.remove(attendance_file.name)
 
         return redirect('faculty-attendances', course_id=course.id)
 
