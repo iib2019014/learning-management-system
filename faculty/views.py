@@ -571,6 +571,34 @@ def renderCreateAttendanceView(request, course_id) :
     return render(request, APPNAME + '/createAttendance.html', context)
 
 
+def renderViewAttendanceView(request, attendance_id) :
+    if not request.user.is_authenticated or isStudent(request.user) :
+        messages.error(request, "You are now allowed do this operation!")
+        return redirect('home')
+    
+    attendance = None
+    context = {}
+
+    try :
+        attendance = Attendance.objects.get(id=attendance_id)
+
+    except attendance.DoesNotExist :
+        return redirect('faculty-home')
+    
+    context['course'] = attendance.course
+
+
+    file = attendance.file
+    # print(file.name, file.path)
+
+    df = pd.read_csv(file.path)
+    # print(df)
+
+    context['df'] = df
+
+
+    return render(request, APPNAME + '/viewAttendance.html', context)
+
 
 def renderDeleteAttendanceView(request, attendance_id) :
     if not request.user.is_authenticated or isStudent(request.user) :

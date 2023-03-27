@@ -1,0 +1,26 @@
+{% extends 'personal/main.html' %}
+{% load static %}
+
+{% block navbar %}
+    {% include 'personal/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <table class="table table-striped table-hover table-bordered attendance-table">
+        <th>
+            <td><b>name</b></td>
+            <td><b>rollno</b></td>
+            <td><b>attendance</b></td>
+        </th>
+        {% for row in df.itertuples %}
+            <tr>
+                <td></td>
+                <td>{{row.name}}</td>
+                <td>{{row.rollno}}</td>
+                <td>{{row.attendance}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

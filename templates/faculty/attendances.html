@@ -15,12 +15,13 @@
         {% for attendance in attendances %}
             <div class="attendance" style="flex-direction: column;">
                 <p class="attendance-date">{{attendance.date}}</p>
-                {% if attendance.file %}
+                <!-- {% if attendance.file %}
                     <a href={{attendance.file.url}} target="_blank" class="attendance-link">check attendance</a>
-                {% endif %}
+                {% endif %} -->
 
                 <div class="attendance-actions">
                     <a href="{% url 'delete-attendance' attendance.id %}" class="btn btn-danger">delete</a>
+                    <a href="{% url 'view-attendance' attendance.id %}" class="btn btn-danger">view</a>
                 </div>
             </div>
         {% endfor %}
